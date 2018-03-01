@@ -10,9 +10,8 @@
 | the IoC container for the system binding all of the various parts.
 |我们要做的第一件事是创建一个新的Laravel应用程序实例，它用作Laravel所有组件的“粘合剂”，并且是系统绑定所有各个部件的IoC容器。
 */
-
 $app = new Illuminate\Foundation\Application(
-    realpath(__DIR__.'/../')
+    realpath(__DIR__.'/../')//项目根目录
 );
 
 /*

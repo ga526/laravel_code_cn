@@ -197,7 +197,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Register a binding with the container.
-     *
+     * 注册与容器的绑定。
      * @param  string|array  $abstract
      * @param  \Closure|string|null  $concrete
      * @param  bool  $shared
@@ -208,6 +208,7 @@ class Container implements ArrayAccess, ContainerContract
         // If no concrete type was given, we will simply set the concrete type to the
         // abstract type. After that, the concrete type to be registered as shared
         // without being forced to state their classes in both of the parameters.
+        // 如果没有给出具体类型，我们将简单地将具体类型设置为抽象类型。 之后，具体类型将被注册为共享，而不必在两个参数中声明它们的类。
         $this->dropStaleInstances($abstract);
 
         if (is_null($concrete)) {
@@ -217,6 +218,8 @@ class Container implements ArrayAccess, ContainerContract
         // If the factory is not a Closure, it means it is just a class name which is
         // bound into this container to the abstract type and we will just wrap it
         // up inside its own Closure to give us more convenience when extending.
+        //如果工厂不是一个Closure，它意味着它只是一个绑定到这个容器中的抽象类型的类名，我们将它包装在它自己的Closure中，以便在扩展时给我们更多的便利。
+
         if (! $concrete instanceof Closure) {
             $concrete = $this->getClosure($abstract, $concrete);
         }
@@ -226,6 +229,8 @@ class Container implements ArrayAccess, ContainerContract
         // If the abstract type was already resolved in this container we'll fire the
         // rebound listener so that any objects which have already gotten resolved
         // can have their copy of the object updated via the listener callbacks.
+        //如果抽象类型已经在这个容器中解决了，我们将触发回弹监听器，这样任何已经解析的对象都可以通过监听器回调来更新对象的副本。
+
         if ($this->resolved($abstract)) {
             $this->rebound($abstract);
         }
@@ -233,7 +238,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Get the Closure to be used when building a type.
-     *
+     * 获取构建类型时使用的Closure
      * @param  string  $abstract
      * @param  string  $concrete
      * @return \Closure
@@ -314,6 +319,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Register a shared binding in the container.
+     * 在容器中注册共享绑定。
      *
      * @param  string|array  $abstract
      * @param  \Closure|string|null  $concrete

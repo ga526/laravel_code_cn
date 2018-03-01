@@ -22,12 +22,12 @@ $app = new Illuminate\Foundation\Application(
 | Next, we need to bind some important interfaces into the container so
 | we will be able to resolve them when needed. The kernels serve the
 | incoming requests to this application from both the web and CLI.
-|
+| 接下来，我们需要将一些重要的接口绑定到容器中，以便我们能够在需要时解决它们。 内核将来自Web和CLI的对该应用程序的传入请求提供给服务器。
 */
 
 $app->singleton(
-    Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
+    Illuminate\Contracts\Http\Kernel::class,// Illuminate\Contracts\Http\Kernel
+    App\Http\Kernel::class  //App\Http\Kernel
 );
 
 $app->singleton(

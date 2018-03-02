@@ -571,7 +571,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Resolve the given type from the container.
-     *
+     * 从容器中解析给定的类型。
      * @param  string  $abstract
      * @return mixed
      */
@@ -582,7 +582,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Resolve the given type from the container.
-     *
+     * 从容器中解析给定的类型。
      * @param  string  $abstract
      * @param  array  $parameters
      * @return mixed
@@ -598,6 +598,7 @@ class Container implements ArrayAccess, ContainerContract
         // If an instance of the type is currently being managed as a singleton we'll
         // just return an existing instance instead of instantiating new instances
         // so the developer can keep using the same objects instance every time.
+        // 如果一个类型的实例当前正在作为单例管理，那么我们只会返回一个现有的实例，而不是实例化新的实例，以便开发人员每次都可以继续使用相同的对象实例。
         if (isset($this->instances[$abstract]) && ! $needsContextualBuild) {
             return $this->instances[$abstract];
         }
@@ -609,6 +610,7 @@ class Container implements ArrayAccess, ContainerContract
         // We're ready to instantiate an instance of the concrete type registered for
         // the binding. This will instantiate the types, as well as resolve any of
         // its "nested" dependencies recursively until all have gotten resolved.
+        //我们准备实例化为绑定注册的具体类型的实例。 这将实例化这些类型，并且递归解决它的任何“嵌套”依赖关系，直到所有的问题都得到解决。
         if ($this->isBuildable($concrete, $abstract)) {
             $object = $this->build($concrete);
         } else {
@@ -618,6 +620,7 @@ class Container implements ArrayAccess, ContainerContract
         // If we defined any extenders for this type, we'll need to spin through them
         // and apply them to the object being built. This allows for the extension
         // of services, such as changing configuration or decorating the object.
+        //如果我们为这种类型定义了任何扩展器，我们需要旋转它们并将它们应用于正在构建的对象。 这允许扩展服务，例如更改配置或装饰对象。
         foreach ($this->getExtenders($abstract) as $extender) {
             $object = $extender($object, $this);
         }
@@ -625,6 +628,7 @@ class Container implements ArrayAccess, ContainerContract
         // If the requested type is registered as a singleton we'll want to cache off
         // the instances in "memory" so we can return it later without creating an
         // entirely new instance of an object on each subsequent request for it.
+        //如果所请求的类型被注册为单例，我们将要缓存“内存”中的实例，以便稍后返回它，而不会在每个后续请求中创建对象的全新实例。
         if ($this->isShared($abstract) && ! $needsContextualBuild) {
             $this->instances[$abstract] = $object;
         }
@@ -634,6 +638,7 @@ class Container implements ArrayAccess, ContainerContract
         // Before returning, we will also set the resolved flag to "true" and pop off
         // the parameter overrides for this build. After those two things are done
         // we will be ready to return back the fully constructed class instance.
+        //在返回之前，我们还将解析标志设置为“true”，并弹出此构建的参数覆盖。 完成这两件事后，我们将准备好返回完全构造的类实例。
         $this->resolved[$abstract] = true;
 
         array_pop($this->with);

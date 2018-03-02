@@ -713,7 +713,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
     /**
      * Resolve the given type from the container.
-     *
+     * 从容器中解析给定的类型
      * (Overriding Container::make)
      *
      * @param  string  $abstract

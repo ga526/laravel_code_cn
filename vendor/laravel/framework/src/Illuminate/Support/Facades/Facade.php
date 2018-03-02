@@ -10,7 +10,7 @@ abstract class Facade
 {
     /**
      * The application instance being facaded.
-     *
+     * 应用程序实例正在显示。   // Illuminate\Foundation\Bootstrap\RegisterFacades ->bootstrap() 会初始化 $app
      * @var \Illuminate\Contracts\Foundation\Application
      */
     protected static $app;

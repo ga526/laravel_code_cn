@@ -774,14 +774,22 @@ class Request
 
     /**
      * Enables support for the _method request parameter to determine the intended HTTP method.
-     *
+     * 启用对_method请求参数的支持以确定预期的HTTP方法
+
      * Be warned that enabling this feature might lead to CSRF issues in your code.
+     * 要警告的是，启用此功能可能会导致代码中出现CSRF问题。
+
      * Check that you are using CSRF tokens when required.
+     * 检查您是否在需要时使用CSRF令牌。
+
      * If the HTTP method parameter override is enabled, an html-form with method "POST" can be altered
      * and used to send a "PUT" or "DELETE" request via the _method request parameter.
      * If these methods are not protected against CSRF, this presents a possible vulnerability.
-     *
+     * 如果启用了HTTP方法参数覆盖，则可以更改具有方法“POST”的html表单，并通过_method请求参数发送“PUT”或“DELETE”请求。
+    如果这些方法不受CSRF保护，则会出现一个可能的漏洞。
      * The HTTP method can only be overridden when the real HTTP method is POST.
+     * 当真正的HTTP方法是POST时，只能覆盖HTTP方法。
+
      */
     public static function enableHttpMethodParameterOverride()
     {

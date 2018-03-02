@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -12,7 +11,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'my application name',
 
     /*
     |--------------------------------------------------------------------------
@@ -38,7 +37,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -50,8 +49,9 @@ return [
     | your application so that it is used when running Artisan tasks.
     |
     */
-
-    'url' => env('APP_URL', 'http://localhost'),
+	
+    //'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', $_SERVER["HTTP_HOST"]),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    //'timezone' => 'UTC',
+    'timezone' => 'PRC',
 
     /*
     |--------------------------------------------------------------------------
@@ -132,7 +133,7 @@ return [
     | The service providers listed here will be automatically loaded on the
     | request to your application. Feel free to add your own services to
     | this array to grant expanded functionality to your applications.
-    |
+    | 此处列出的服务提供商将自动加载到您的应用程序请求中。 随意将自己的服务添加到此阵列中，以将扩展功能授予您的应用程序。
     */
 
     'providers' => [
@@ -187,7 +188,7 @@ return [
     | This array of class aliases will be registered when this application
     | is started. However, feel free to register as many as you wish as
     | the aliases are "lazy" loaded so they don't hinder performance.
-    |
+    | 此应用程序启动时将注册此类别名数组。 然而，随意地注册尽可能多的别名，因为别名是“懒惰”加载的，所以它们不会妨碍性能。
     */
 
     'aliases' => [

@@ -33,6 +33,7 @@ require __DIR__.'/../bootstrap/autoload.php';
 | the responses back to the browser and delight our users.
 |我们需要阐述PHP开发，所以让我们打开灯光。这会引导框架并准备好使用，然后它会加载此应用程序，以便我们可以运行它并将响应发送回浏览器，并令我们愉快用户。
 
+//注：获取laravel核心的Ioc容器
 */
 
 $app = require_once __DIR__.'/../bootstrap/app.php';
@@ -46,7 +47,9 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | through the kernel, and send the associated response back to
 | the client's browser allowing them to enjoy the creative
 | and wonderful application we have prepared for them.
-|
+| 一旦我们有了应用程序，我们就可以通过内核处理传入的请求，并将相关响应发送回客户端的浏览器，让他们享受我们为他们准备的创意和精彩的应用程序。
+
+//注:生成核心容器
 */
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);

@@ -639,6 +639,7 @@ class Container implements ArrayAccess, ContainerContract
         // the parameter overrides for this build. After those two things are done
         // we will be ready to return back the fully constructed class instance.
         //在返回之前，我们还将解析标志设置为“true”，并弹出此构建的参数覆盖。 完成这两件事后，我们将准备好返回完全构造的类实例。
+
         $this->resolved[$abstract] = true;
 
         array_pop($this->with);
@@ -648,7 +649,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Get the concrete type for a given abstract.
-     *
+     * 获取给定摘要的具体类型。
      * @param  string  $abstract
      * @return mixed   $concrete
      */
@@ -661,6 +662,7 @@ class Container implements ArrayAccess, ContainerContract
         // If we don't have a registered resolver or concrete for the type, we'll just
         // assume each type is a concrete name and will attempt to resolve it as is
         // since the container should be able to resolve concretes automatically.
+        // 如果我们没有注册的解析器或具体的类型，我们将假设每个类型都是具体名称，并且会尝试按原样解决它，因为容器应该能够自动解析混凝土。
         if (isset($this->bindings[$abstract])) {
             return $this->bindings[$abstract]['concrete'];
         }

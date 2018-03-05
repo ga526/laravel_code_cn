@@ -54,7 +54,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
      */
     public static function capture()
     {
-        static::enableHttpMethodParameterOverride();
+        static::enableHttpMethodParameterOverride();//启用 PUT/DELETE 请求
 
         return static::createFromBase(SymfonyRequest::createFromGlobals());
     }
@@ -178,7 +178,7 @@ class Request extends SymfonyRequest implements Arrayable, ArrayAccess
 
     /**
      * Determine if the current request URI matches a pattern.
-     *
+     * 确定当前的请求URI是否与模式匹配
      * @return bool
      */
     public function is()

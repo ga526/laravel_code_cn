@@ -150,9 +150,9 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
         //将 app,Illuminate\Foundation\Application 绑定为 $this
         $this->registerBaseBindings();
-
+        //注册所有基础服务提供者。   日志  事件   路由
         $this->registerBaseServiceProviders();
-
+        //在容器中注册核心类别名。
         $this->registerCoreContainerAliases();
     }
 
@@ -181,7 +181,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
     /**
      * Register all of the base service providers.
-     *
+     * 注册所有基础服务提供者。
      * @return void
      */
     protected function registerBaseServiceProviders()
@@ -568,6 +568,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         // If the given "provider" is a string, we will resolve it, passing in the
         // application instance automatically for the developer. This is simply
         // a more convenient way of specifying your service provider classes.
+        // 如果给定的“提供者”是一个字符串，我们将解决它，为开发人员自动传入应用程序实例。 这只是指定服务提供者类的更方便的方法。
         if (is_string($provider)) {
             $provider = $this->resolveProvider($provider);
         }
@@ -581,6 +582,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         // If the application has already booted, we will call this boot method on
         // the provider class so it has an opportunity to do its boot logic and
         // will be ready for any usage by this developer's application logic.
+        // 如果应用程序已经启动，我们将在提供程序类中调用此引导方法，以便它有机会执行其引导逻辑，并且可以为此开发人员的应用程序逻辑的任何使用做好准备。
         if ($this->booted) {
             $this->bootProvider($provider);
         }
@@ -605,7 +607,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
     /**
      * Resolve a service provider instance from the class name.
-     *
+     * 从类名解析服务提供者实例。
      * @param  string  $provider
      * @return \Illuminate\Support\ServiceProvider
      */

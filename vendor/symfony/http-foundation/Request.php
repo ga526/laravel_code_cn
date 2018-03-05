@@ -293,7 +293,7 @@ class Request
 
     /**
      * Creates a new request with values from PHP's super globals.
-     *
+     * 使用PHP超全局变量值创建一个新的请求。
      * @return static
      */
     public static function createFromGlobals()

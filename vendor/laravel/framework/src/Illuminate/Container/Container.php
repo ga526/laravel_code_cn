@@ -31,35 +31,35 @@ class Container implements ArrayAccess, ContainerContract
      *
      * @var array
      */
-    protected $bindings = [];
+    public $bindings = [];
 
     /**
      * The container's method bindings.
      *
      * @var array
      */
-    protected $methodBindings = [];
+    public $methodBindings = [];
 
     /**
      * The container's shared instances.
      *
      * @var array
      */
-    protected $instances = [];
+    public $instances = [];
 
     /**
      * The registered type aliases.
      *
      * @var array
      */
-    protected $aliases = [];
+    public $aliases = [];
 
     /**
      * The registered aliases keyed by the abstract name.
-     *
+     * 由抽象名称键入的已注册别名。
      * @var array
      */
-    protected $abstractAliases = [];
+    public $abstractAliases = [];
 
     /**
      * The extension closures for services.
@@ -374,6 +374,7 @@ class Container implements ArrayAccess, ContainerContract
         // We'll check to determine if this type has been bound before, and if it has
         // we will fire the rebound callbacks registered with the container and it
         // can be updated with consuming classes that have gotten resolved here.
+        // 我们将检查以确定此类型是否之前已被绑定，如果有，我们将触发在容器中注册的回弹回调，并且可以使用在此处已解决的使用类进行更新。
         $this->instances[$abstract] = $instance;
 
         if ($isBound) {
@@ -592,6 +593,7 @@ class Container implements ArrayAccess, ContainerContract
         $abstract = $this->getAlias($abstract);
 
         $needsContextualBuild = ! empty($parameters) || ! is_null(
+            //从 abstractAliases 属性中获取 concrete
             $this->getContextualConcrete($abstract)
         );
 
@@ -604,7 +606,7 @@ class Container implements ArrayAccess, ContainerContract
         }
 
         $this->with[] = $parameters;
-
+        //从bindings 属性中 获取给定摘要的具体类型。
         $concrete = $this->getConcrete($abstract);
 
         // We're ready to instantiate an instance of the concrete type registered for
@@ -649,7 +651,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Get the concrete type for a given abstract.
-     * 获取给定摘要的具体类型。
+     * 从bindings 属性中 获取给定摘要的具体类型。
      * @param  string  $abstract
      * @return mixed   $concrete
      */
@@ -672,7 +674,7 @@ class Container implements ArrayAccess, ContainerContract
 
     /**
      * Get the contextual concrete binding for the given abstract.
-     *
+     * 从 abstractAliases 属性中获取 concrete
      * @param  string  $abstract
      * @return string|null
      */
@@ -734,6 +736,7 @@ class Container implements ArrayAccess, ContainerContract
         // If the concrete type is actually a Closure, we will just execute it and
         // hand back the results of the functions, which allows functions to be
         // used as resolvers for more fine-tuned resolution of these objects.
+        // 如果具体类型实际上是一个Closure，我们将执行它并返回这些函数的结果，这允许函数作为解析器用于更加精细地调整这些对象的分辨率。
         if ($concrete instanceof Closure) {
             return $concrete($this, $this->getLastParameterOverride());
         }
@@ -754,6 +757,7 @@ class Container implements ArrayAccess, ContainerContract
         // If there are no constructors, that means there are no dependencies then
         // we can just resolve the instances of the objects right away, without
         // resolving any other types or dependencies out of these containers.
+        // 如果没有构造函数，那意味着没有依赖关系，那么我们可以立即解析对象的实例，而无需解析这些容器之外的任何其他类型或依赖项。
         if (is_null($constructor)) {
             array_pop($this->buildStack);
 
@@ -765,6 +769,7 @@ class Container implements ArrayAccess, ContainerContract
         // Once we have all the constructor's parameters we can create each of the
         // dependency instances and then use the reflection instances to make a
         // new instance of this class, injecting the created dependencies in.
+        // 一旦我们拥有了所有构造函数的参数，我们就可以创建每个依赖项实例，然后使用反射实例来创建这个类的新实例，并在其中注入创建的依赖项。
         $instances = $this->resolveDependencies(
             $dependencies
         );
@@ -788,6 +793,7 @@ class Container implements ArrayAccess, ContainerContract
             // If this dependency has a override for this particular build we will use
             // that instead as the value. Otherwise, we will continue with this run
             // of resolutions and let reflection attempt to determine the result.
+            // 如果这个依赖关系具有这个特定版本的覆盖，我们将使用它作为值。 否则，我们将继续执行此决议并让反思尝试确定结果。
             if ($this->hasParameterOverride($dependency)) {
                 $results[] = $this->getParameterOverride($dependency);
 
@@ -797,6 +803,7 @@ class Container implements ArrayAccess, ContainerContract
             // If the class is null, it means the dependency is a string or some other
             // primitive type which we can not resolve since it is not a class and
             // we will just bomb out with an error since we have no-where to go.
+            // 如果该类为null，则意味着依赖项是一个字符串或其他一些我们无法解决的基本类型，因为它不是一个类，因为我们没有去哪里，所以我们只会弹出一个错误。
             $results[] = is_null($class = $dependency->getClass())
                             ? $this->resolvePrimitive($dependency)
                             : $this->resolveClass($dependency);

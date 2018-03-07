@@ -553,7 +553,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
     /**
      * Register a service provider with the application.
-     *
+     * 向应用程序注册一个服务提供者。
      * @param  \Illuminate\Support\ServiceProvider|string  $provider
      * @param  array  $options
      * @param  bool   $force
@@ -562,13 +562,14 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     public function register($provider, $options = [], $force = false)
     {
         if (($registered = $this->getProvider($provider)) && ! $force) {
+            //从$app ->serviceProviders 判断, 如果已经注册过，则直接返回
             return $registered;
         }
 
         // If the given "provider" is a string, we will resolve it, passing in the
         // application instance automatically for the developer. This is simply
         // a more convenient way of specifying your service provider classes.
-        // 如果给定的“提供者”是一个字符串，我们将解决它，为开发人员自动传入应用程序实例。 这只是指定服务提供者类的更方便的方法。
+        // 如果给定的“提供者”是一个字符串，我们将实例化它，并将 Application 实例做为参数传给它，使它能够更方便的使用 Application 的方法。
         if (is_string($provider)) {
             $provider = $this->resolveProvider($provider);
         }
@@ -577,12 +578,15 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             $provider->register();
         }
 
+        //将服务提供商标志为已注册
+        //$app ->loadedProviders["provider的名字"] = true
+        //$app ->serviceProviders[] =   {provider 实例}
         $this->markAsRegistered($provider);
 
         // If the application has already booted, we will call this boot method on
         // the provider class so it has an opportunity to do its boot logic and
         // will be ready for any usage by this developer's application logic.
-        // 如果应用程序已经启动，我们将在提供程序类中调用此引导方法，以便它有机会执行其引导逻辑，并且可以为此开发人员的应用程序逻辑的任何使用做好准备。
+        // 如果 app 已经启动,则去调用 provider 的 boot 方法(如果有)
         if ($this->booted) {
             $this->bootProvider($provider);
         }
@@ -618,7 +622,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
 
     /**
      * Mark the given provider as registered.
-     *
+     * 将服务提供商标志为已注册
      * @param  \Illuminate\Support\ServiceProvider  $provider
      * @return void
      */

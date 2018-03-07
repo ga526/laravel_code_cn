@@ -153,7 +153,8 @@ class Arr
 
     /**
      * Return the first element in an array passing a given truth test.
-     *
+     * 返回数组中第一个传递给定真值测试的元素
+     * 注：如有第二个参数(匿名回调函数),则依次遍历数组中各个元素,将其值与键分别做为回调函数的参数执行,执行到任意一个返回true的,就返回这个值，否则返回   { 回调(null) }
      * @param  array  $array
      * @param  callable|null  $callback
      * @param  mixed  $default

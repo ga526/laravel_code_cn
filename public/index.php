@@ -257,7 +257,6 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 //注:生成核心容器
 */
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-die;
 /*
     $app ->resolved (array):
         'events' => boolean(true),

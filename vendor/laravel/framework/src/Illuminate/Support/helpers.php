@@ -1002,7 +1002,7 @@ if (! function_exists('trait_uses_recursive')) {
 if (! function_exists('value')) {
     /**
      * Return the default value of the given value.
-     *
+     * 返回给定值的默认值。(如果是回调函数,则返回执行结果)
      * @param  mixed  $value
      * @return mixed
      */

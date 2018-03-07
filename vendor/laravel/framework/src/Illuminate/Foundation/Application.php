@@ -149,10 +149,17 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         }
 
         //将 app,Illuminate\Foundation\Application 绑定为 $this
+        // $this ->aliases
+        // $this ->abstractAliases
+        // $this ->instances
         $this->registerBaseBindings();
         //注册所有基础服务提供者。   日志  事件   路由
+        //$this ->serviceProviders
+        //$this ->loadedProviders
         $this->registerBaseServiceProviders();
         //在容器中注册核心类别名。
+        // $this ->aliases
+        // $this ->abstractAliases
         $this->registerCoreContainerAliases();
     }
 
